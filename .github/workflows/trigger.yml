@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Rollback a microservice to a specific version
     steps:
-      - env:
-          MICROSERVICE: "auth"
-          VERSION: "2.13.1"
-        # Assumes `rollback` logic is implemented
-        run: echo $MICROSERVICE $VERSION
+      - run: echo ${{ github.event }}
+      - run: |
+          microservice=b
+          version=c
+          rollback $microservice $version
