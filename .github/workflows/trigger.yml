@@ -1,0 +1,27 @@
+name: Trigger
+
+on: repository_dispatch
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - uses: ./hello-world
+        id: hello
+        with:
+          who-to-greet: 'Mona the Octocat'
+
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+      - name: Dump GitHub context
+        env:
+          # curl -d '{"event_type":"trigger","client_payload":{"key":"value"}}'
+          EVENT_ACTION: ${{ github.event.action }} # captures "trigger"
+          CLIENT_PAYLOAD: ${{ github.event.client_payload.key }} # captures "value"
+        run: |
+          echo $EVENT_ACTION $CLIENT_PAYLOAD
