@@ -8,8 +8,9 @@ jobs:
     name: Rollback a microservice to a specific version
     steps:
       - env:
-          GITHUB_EVENT: ${{ github.event }}
+          GITHUB_EVENT: ${{ toJson(github) }}
         run: echo $GITHUB_EVENT
+      - run: echo ${{ toJson(github.event) }}
       - run: |
           microservice=b
           version=c
