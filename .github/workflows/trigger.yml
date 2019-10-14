@@ -11,4 +11,4 @@ jobs:
       - run: |
           microservice=b
           version=c
-          rollback $microservice $version
+          echo $microservice $version
