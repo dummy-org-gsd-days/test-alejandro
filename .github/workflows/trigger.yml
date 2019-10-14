@@ -12,6 +12,6 @@ jobs:
         run: echo $GITHUB_EVENT
       - run: echo "${{ toJson(github.event) }}"
       - run: |
-          microservice=b
-          version=c
+          microservice=$(echo "${{ toJson(github.event.action) }}" | cut -f 1 -d "/")
+          version=$(echo "${{ toJson(github.event.action) }}" | cut -f 2 -d "/")
           echo $microservice $version
