@@ -10,7 +10,7 @@ jobs:
       - env:
           GITHUB_EVENT: ${{ toJson(github) }}
         run: echo $GITHUB_EVENT
-      - run: echo ${{ toJson(github.event) }}
+      - run: echo "${{ toJson(github.event) }}"
       - run: |
           microservice=b
           version=c
