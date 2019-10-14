@@ -7,11 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Rollback a microservice to a specific version
     steps:
-      - env:
-          GITHUB_EVENT: ${{ toJson(github) }}
-        run: echo $GITHUB_EVENT
-      - run: echo "${{ toJson(github.event) }}"
       - run: |
-          microservice=$(echo "${{ toJson(github.event.action) }}" | cut -f 1 -d "/")
-          version=$(echo "${{ toJson(github.event.action) }}" | cut -f 2 -d "/")
-          echo $microservice $version
+          echo "${{ toJson(github.event.client_payload.microservice) }}" \
+               "${{ toJson(github.event.client_payload.version) }}"
